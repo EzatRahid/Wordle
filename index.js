@@ -102,7 +102,7 @@ newGameBtn.addEventListener('click',() =>{
         console.log(targetWord)
 })
 
-let formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()
+let formatTargetWord;
 
 // Submits word
 const submitGuess = () =>{
@@ -135,11 +135,12 @@ const submitGuess = () =>{
         else if(targetWord.includes(currentGuess[i])){
             box.style.backgroundColor = '#BFA900'
         }else{
-            box.style.backgroundColor = '#545454'
+            box.style.backgroundColor = '#383838'
         }
     })
     
     if(currentRow === 5 && currentGuess !== targetWord){
+        formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()
         updateAlert(`<i class="fa-solid fa-xmark"></i> You ran out of tries! \nThe correct word was: ${formatTargetWord} `)
         gameOver = true
     }
