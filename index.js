@@ -70,6 +70,20 @@ let gameOver = false
 
 let newGameBtn = document.getElementById('newGame')
 
+let alertBox = document.getElementById('alert')
+let alertTimer;
+
+const updateAlert = (message) =>{
+    alertBox.textContent = message
+    alertBox.classList.add('show')
+
+    clearTimeout(alertTimer)
+
+    alertTimer = setTimeout(() =>{
+        alertBox.classList.remove('show')
+    },4000)
+}
+
 // Restarts game
 newGameBtn.addEventListener('click',() =>{
     let rows = document.querySelectorAll('.row')
@@ -84,6 +98,7 @@ newGameBtn.addEventListener('click',() =>{
 
         currentRow = 0;
         gameOver = false
+        updateAlert('Game reset!')
 
         console.log(targetWord)
 })
@@ -96,6 +111,7 @@ const submitGuess = () =>{
     let boxes = rows[currentRow].querySelectorAll('.box')
 
     if (currentGuess === targetWord) {
+        updateAlert('You Win! Want to play again?')
         gameOver = true;
     }
     
@@ -107,6 +123,7 @@ const submitGuess = () =>{
             box.style.backgroundColor = '#BFA900'
         }
         if(currentRow == 6){
+            updateAlert('You ran out of tries!')
             gameOver = true
         }
     })
