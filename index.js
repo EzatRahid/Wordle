@@ -74,7 +74,7 @@ let alertBox = document.getElementById('alert')
 let alertTimer;
 
 const updateAlert = (message) =>{
-    alertBox.textContent = message
+    alertBox.innerHTML = message
     alertBox.classList.add('show')
 
     clearTimeout(alertTimer)
@@ -87,7 +87,6 @@ const updateAlert = (message) =>{
 // Restarts game
 newGameBtn.addEventListener('click',() =>{
     let rows = document.querySelectorAll('.row')
-    let boxes = rows[currentRow].querySelectorAll('.box')
 
         targetWord = Words[Math.floor(Math.random() * Words.length)].toUpperCase()
 
@@ -98,20 +97,34 @@ newGameBtn.addEventListener('click',() =>{
 
         currentRow = 0;
         gameOver = false
-        updateAlert('Game reset!')
+        updateAlert('<i class="fa-solid fa-check"></i> Game reset!')
 
         console.log(targetWord)
 })
 
+let formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()
 
 // Submits word
 const submitGuess = () =>{
+    if(currentGuess.length !== 5){
+        updateAlert('<i class="fa-solid fa-xmark"></i> Not enough letters!')
+        const rows = document.querySelectorAll('.row')
+        const currentRowEl = rows[currentRow]
+
+        currentRowEl.classList.add('shake')
+
+        setTimeout(() =>{
+            currentRowEl.classList.remove('shake')
+        },450)
+        return
+    }
+
     console.log('Submited: ', currentGuess)
     let rows = document.querySelectorAll('.row')
     let boxes = rows[currentRow].querySelectorAll('.box')
 
     if (currentGuess === targetWord) {
-        updateAlert('You Win! Want to play again?')
+        updateAlert(' <i class="fa-solid fa-crown"></i> You Win! Want to play again?')
         gameOver = true;
     }
     
@@ -121,27 +134,41 @@ const submitGuess = () =>{
         }
         else if(targetWord.includes(currentGuess[i])){
             box.style.backgroundColor = '#BFA900'
-        }
-        if(currentRow == 6){
-            updateAlert('You ran out of tries!')
-            gameOver = true
+        }else{
+            box.style.backgroundColor = '#545454'
         }
     })
-
+    
+    if(currentRow === 5 && currentGuess !== targetWord){
+        updateAlert(`<i class="fa-solid fa-xmark"></i> You ran out of tries! \nThe correct word was: ${formatTargetWord} `)
+        gameOver = true
+    }
     currentRow++;
     currentGuess = ''
 }
 
 // Updates each box with user input
-const updateBox = () =>{
-    let rows = document.querySelectorAll('.row')
-    let boxes = rows[currentRow].querySelectorAll('.box')
+const updateBox = () => {
+    const rows = document.querySelectorAll('.row');
+    const boxes = rows[currentRow].querySelectorAll('.box');
 
-    boxes.forEach((box,i) => {
-        box.textContent = currentGuess[i] || ''
-        
-    })
-}
+    boxes.forEach((box, i) => {
+        const letter = currentGuess[i] || '';
+
+    
+        if (box.textContent !== letter) {
+            box.textContent = letter;
+
+            if (letter !== '') {
+                box.classList.add('pop');
+
+                setTimeout(() => {
+                    box.classList.remove('pop');
+                }, 150);
+            }
+        }
+    });
+};
 
 
 // Main input listener
