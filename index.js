@@ -60,3 +60,95 @@ const Words = ["about","above","abuse","actor","acute","admit","adopt","adult",
   "watch","water","wheel","where","which","while","white","whole",
   "whose","woman","women","world","worry","worse","worst","worth",
   "would","wound","write","wrong","wrote","yield","young","youth"]
+
+let targetWord = Words[Math.floor(Math.random() * Words.length)].toUpperCase()
+
+let currentGuess = '';
+let currentRow = 0;
+
+let gameOver = false
+
+let newGameBtn = document.getElementById('newGame')
+
+// Restarts game
+newGameBtn.addEventListener('click',() =>{
+    let rows = document.querySelectorAll('.row')
+    let boxes = rows[currentRow].querySelectorAll('.box')
+
+        targetWord = Words[Math.floor(Math.random() * Words.length)].toUpperCase()
+
+        document.querySelectorAll('.box').forEach(box => {
+        box.textContent = '';
+        box.style.backgroundColor = '';
+        });
+
+        currentRow = 0;
+        gameOver = false
+
+        console.log(targetWord)
+})
+
+
+// Submits word
+const submitGuess = () =>{
+    console.log('Submited: ', currentGuess)
+    let rows = document.querySelectorAll('.row')
+    let boxes = rows[currentRow].querySelectorAll('.box')
+
+    if (currentGuess === targetWord) {
+        gameOver = true;
+    }
+    
+    boxes.forEach((box,i) =>{
+        if(currentGuess[i] == targetWord[i]){
+            box.style.backgroundColor = '#188703';
+        }
+        else if(targetWord.includes(currentGuess[i])){
+            box.style.backgroundColor = '#BFA900'
+        }
+        if(currentRow == 6){
+            gameOver = true
+        }
+    })
+
+    currentRow++;
+    currentGuess = ''
+}
+
+// Updates each box with user input
+const updateBox = () =>{
+    let rows = document.querySelectorAll('.row')
+    let boxes = rows[currentRow].querySelectorAll('.box')
+
+    boxes.forEach((box,i) => {
+        box.textContent = currentGuess[i] || ''
+        
+    })
+}
+
+
+// Main input listener
+document.addEventListener("keydown",(e) =>{
+    if(gameOver) return
+
+    let key = e.key
+    
+    if(key == 'Backspace'){
+        currentGuess = currentGuess.slice(0 , -1)
+    }
+
+    else if(key == 'Enter'){
+        e.preventDefault()
+        submitGuess()
+        return
+    }
+
+    else if(/^[a-zA-Z]$/.test(key)){
+         if (currentGuess.length < 5) {
+        currentGuess += key.toUpperCase();
+    }
+    }
+
+    console.log(currentGuess)
+    updateBox()
+})

@@ -12,12 +12,34 @@
 }
 
 .nav{
-    height: 100px;
+    height: 70px;
     border-bottom: 1px solid #2e2e2e;
 }
 
+.newGameContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.newGameContainer button{
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #188703;
+    color: white;
+    outline: 0;
+    border: 1px solid #2EB812;
+    border-radius: 5px;
+    transition: 0.2s all ease;
+}
+.newGameContainer button:hover{
+    background-color: #15BF00;
+    border: 1px solid #42F21F;
+}
+
 .gameContainer{
-    height: calc(100vh - 100px);
+    height: calc(100vh - 112px);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -34,4 +56,12 @@
     width: 80px;
     border: 3px solid #2e2e2e;
     margin-right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
