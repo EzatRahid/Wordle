@@ -91,7 +91,7 @@ newGameBtn.addEventListener('click',() =>{
 
         document.querySelectorAll('.box').forEach(box => {
         box.textContent = '';
-        box.style.backgroundColor = '';
+        box.classList.remove('correct', 'present', 'absent')
         });
 
         currentRow = 0;
@@ -127,34 +127,22 @@ const submitGuess = () =>{
         gameOver = true;
     }
 
-    const styles = getComputedStyle(document.documentElement);
-
-    const green = styles.getPropertyValue('--green');
-    const yellow = styles.getPropertyValue('--yellow');
-    const gray = styles.getPropertyValue('--gray');
     
+
     boxes.forEach((box, i) => {
+        
+        box.classList.remove('correct', 'present', 'absent');
         if (currentGuess[i] === targetWord[i]) {
-            box.style.backgroundColor = green;
+            box.classList.add('correct');
         }
         else if (targetWord.includes(currentGuess[i])) {
-            box.style.backgroundColor = yellow;
+            box.classList.add('present');
         }
         else {
-            box.style.backgroundColor = gray;
+            box.classList.add('absent');
         }
     });
     
-    boxes.forEach((box,i) =>{
-        if(currentGuess[i] == targetWord[i]){
-            box.style.backgroundColor = '#188703';
-        }
-        else if(targetWord.includes(currentGuess[i])){
-            box.style.backgroundColor = '#BFA900'
-        }else{
-            box.style.backgroundColor = '#383838'
-        }
-    })
     
     if(currentRow === 5 && currentGuess !== targetWord){
         formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()

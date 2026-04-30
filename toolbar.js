@@ -26,25 +26,60 @@ const themes = {
         hover: "#15BF00",
         hoverOutline: "#42F21F",
         yellow: "#BFA900",
-        gray: "#333"
+        gray: "#333",
+        boxText:"#FCFCF8",
+        navColor:'#ffffff'
     },
     miami: {
-        bg: "#0f172a",
-        text: "#e0f2fe",
-        green: "#22c55e",
+        bg: "#18181A",
+        outline:"#FCFCF8",
+        text: "#35d4dd",
+        green: "#F35588",
+        greenOutline: "#f984a9",
+        hover: "#f383a6",
+        hoverOutline: "#f49ab6",
         yellow: "#facc15",
-        gray: "#334155"
+        gray: "#334155",
+        boxText:"#FCFCF8"
     },
     strawberry: {
         bg: "#F37F83",
         text: "#FCFCF8",
         outline:"#FCFCF8",
-        green: "#EF6E77",
+        green: "#e65761",
         greenOutline:"#fa8c93",
-        hover: "#9cf8cc",
-        hoverOutline: "#b6f0d3",
-        yellow: "#fff36a",
-        gray: "#553347"
+        hover: "#ee8087",
+        hoverOutline: "#fcb3b8",
+        yellow: "#f2eb9c",
+        gray: "#92607d",
+        boxText:"#FCFCF8",
+        navColor:'#e65761'
+    },
+    dracula: {
+        bg: "#282A36",
+        text: "#3d4662",
+        outline:"#6272A4",
+        green: "#BD93F9",
+        greenOutline:"#cdacfb",
+        hover: "#d4b8fb",
+        hoverOutline: "#dfccf8",
+        yellow: "#f2eb9c",
+        gray: "#272024",
+        boxText:"#FCFCF8",
+        navColor:'#BD93F9'
+    },
+    bushido: {
+        bg: "#242933",
+        text: "#242933",
+        outline:"#f4717a",
+        green: "#EC4C56",
+        greenOutline:"#EC4C56",
+        hover: "#e87078",
+        hoverOutline: "#f58e95",
+        yellow: "#f2eb9c",
+        gray: "#2b2127",
+        boxText:"#f3979d",
+        navColor:'#EC4C56'
     }
 };
 

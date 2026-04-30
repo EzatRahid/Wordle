@@ -16,6 +16,8 @@
     --hoverOutline:#42F21F;
     --yellow: #BFA900;
     --gray: #333;
+    --boxText:#fff;
+    --navColor:#ffffff;
 }
 
 .main{
@@ -53,7 +55,7 @@
 .nav{
     height: 70px;
     border-bottom: 1px solid var(--outline);
-    color: white;
+    color: var(--navColor);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -78,10 +80,11 @@
     transform: translateX(-50%) translateY(10px);
 
     background: var(--bg);
-    color: var(--text);
+    color: var(--navColor);
     padding: 6px 10px;
     border-radius: 6px;
     font-size: 12px;
+    border: 1px solid var(--outline);
 
     white-space: nowrap;
     color: white;
@@ -119,17 +122,19 @@
 .themeDiv{
    margin-bottom: 10px;
    cursor: pointer;
-   transition: 0.2s all ease;
    border-radius: 10px;
    padding: 4px 8px;
+   gap: 20px;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   background-color: var(--green);
+   transition: 0.2s all ease;
    
 }
 
 .themeDiv:hover{
-   border: 1px solid var(--green);
+    background-color: var(--hover);
 }
 
 .colors{
@@ -137,13 +142,14 @@
 }
 
 .colors:active{
-    
+    border: 1px solid var(--greenOutline);
 }
 .colors .color{
     height: 15px;
     width: 15px;
     border-radius: 5px;
     margin-right: 5px;
+    border: 0.1px solid;
 }
 .themesContainer.reveal {
     opacity: 1;
@@ -163,10 +169,11 @@
     padding: 5px 10px;
     cursor: pointer;
     background-color: var(--green);
-    color: white;
+    color: var(--text);
     outline: 0;
     border: 1px solid var(--greenOutline);
     border-radius: 5px;
+    font-weight: bold;
     transition: 0.2s all ease;
 }
 .newGameContainer button:hover{
@@ -197,10 +204,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text);
+    color: var(--boxText);
     font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;
+    transition: 0.2s all ease;
+
+}
+
+.box.correct{
+    background-color: var(--green);
+}
+.box.absent{
+    background-color: var(--gray);
+}
+.box.present{
+    background-color: var(--yellow);
 }
 
 @keyframes shake {
