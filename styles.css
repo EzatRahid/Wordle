@@ -6,9 +6,23 @@
     font-family: "Roboto", sans-serif;
 }
 
+:root {
+    --bg: #212121;
+    --outline:#2e2e2e;
+    --text: #ffffff;
+    --green: #188703;
+    --greenOutline:#2EB812;
+    --hover:#15BF00;
+    --hoverOutline:#42F21F;
+    --yellow: #BFA900;
+    --gray: #333;
+}
+
 .main{
     height: 100vh;
-    background-color:#212121 ;
+    background-color:var(--bg) ;
+    color: var(--text);
+    transition: 0.2s all ease;
 }
 
 .alert{
@@ -38,10 +52,104 @@
 }
 .nav{
     height: 70px;
-    border-bottom: 1px solid #2e2e2e;
+    border-bottom: 1px solid var(--outline);
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.navRight{
+    display: flex;
+
+}
+
+.nav i{
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    margin-right:12px;
+    font-size: 12px;
+}
+
+.tooltip{
+    position: absolute;
+    transform: translateX(-50%) translateY(10px);
+
+    background: var(--bg);
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+
+    white-space: nowrap;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.2s ease;
+}
+
+
+.iconWrapper:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5);
+}
+
+
+.themesContainer {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    max-width: fit-content;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 16px;
+    border: 1px solid var(--outline);
+    border-radius: 10px;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    visibility: hidden;
+
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+.themeDiv{
+   margin-bottom: 10px;
+   cursor: pointer;
+   transition: 0.2s all ease;
+   border-radius: 10px;
+   padding: 4px 8px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   
+}
+
+.themeDiv:hover{
+   border: 1px solid var(--green);
+}
+
+.colors{
+    display: flex;
+}
+
+.colors:active{
+    
+}
+.colors .color{
+    height: 15px;
+    width: 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.themesContainer.reveal {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
 }
 
 .newGameContainer{
@@ -54,16 +162,16 @@
 .newGameContainer button{
     padding: 5px 10px;
     cursor: pointer;
-    background-color: #188703;
+    background-color: var(--green);
     color: white;
     outline: 0;
-    border: 1px solid #2EB812;
+    border: 1px solid var(--greenOutline);
     border-radius: 5px;
     transition: 0.2s all ease;
 }
 .newGameContainer button:hover{
-    background-color: #15BF00;
-    border: 1px solid #42F21F;
+    background-color: var(--hover);
+    border: 1px solid var(--hoverOutline);
 }
 
 .gameContainer{
@@ -83,13 +191,13 @@
 .box{
     height: 80px;
     width: 80px;
-    border: 3px solid #2e2e2e;
+    border: 3px solid var(--outline);
     margin-right: 10px;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--text);
     font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;

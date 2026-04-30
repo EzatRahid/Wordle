@@ -10,12 +10,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Changa+One:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">  
     <script src="index.js" defer></script>
+    <script src="toolbar.js" defer></script>
 </head>
 <body>
     <div class="main">
+        <div class="themesContainer" id="themesContainer">
+            <div class="themeDiv" data-theme="default">
+                <p>defualt</p>
+                <div class="colors">
+                    <div class="color" style="background: #188703"></div>
+                    <div class="color" style="background: #212121"></div>
+                    <div class="color" style="background: #fff"></div>
+                </div>
+            </div>
+            <div class="themeDiv" data-theme="miami">
+                <p>miami runner</p>
+                <div class="colors">
+                    <div class="color"></div>
+                    <div class="color"></div>
+                    <div class="color"></div>
+                </div>
+            </div>
+            <div class="themeDiv" data-theme="strawberry">
+                <p>strawberry</p>
+                <div class="colors">
+                    <div class="color"></div>
+                    <div class="color"></div>
+                    <div class="color"></div>
+                </div>
+            </div>
+    
+        </div>
         <div class="alert" id="alert"></div>
         <div class="nav">
             <h1><span>らכ𑣓ᐁ𑣣𑣕しဖ</span></h1>
+            <div class="navRight">
+                <div class="iconWrapper">
+                    <i class="fa-solid fa-paintbrush" id="themesBtn"></i>
+                    <div class="tooltip">Themes</div>
+                </div>
+                <div class="iconWrapper">
+                    <i class="fa-regular fa-hourglass"></i>
+                    <div class="tooltip">Game Timer</div>
+                </div>
+                <div class="iconWrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <div class="tooltip">Stats</div>
+                </div>
+            </div>
+            
         </div>
         <div class="newGameContainer">
             <button id="newGame">New Game</button>

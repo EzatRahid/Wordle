@@ -65,7 +65,6 @@ let targetWord = Words[Math.floor(Math.random() * Words.length)].toUpperCase()
 
 let currentGuess = '';
 let currentRow = 0;
-
 let gameOver = false
 
 let newGameBtn = document.getElementById('newGame')
@@ -127,6 +126,24 @@ const submitGuess = () =>{
         updateAlert(' <i class="fa-solid fa-crown"></i> You Win! Want to play again?')
         gameOver = true;
     }
+
+    const styles = getComputedStyle(document.documentElement);
+
+    const green = styles.getPropertyValue('--green');
+    const yellow = styles.getPropertyValue('--yellow');
+    const gray = styles.getPropertyValue('--gray');
+    
+    boxes.forEach((box, i) => {
+        if (currentGuess[i] === targetWord[i]) {
+            box.style.backgroundColor = green;
+        }
+        else if (targetWord.includes(currentGuess[i])) {
+            box.style.backgroundColor = yellow;
+        }
+        else {
+            box.style.backgroundColor = gray;
+        }
+    });
     
     boxes.forEach((box,i) =>{
         if(currentGuess[i] == targetWord[i]){
@@ -141,7 +158,7 @@ const submitGuess = () =>{
     
     if(currentRow === 5 && currentGuess !== targetWord){
         formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()
-        updateAlert(`<i class="fa-solid fa-xmark"></i> You ran out of tries! \nThe correct word was: ${formatTargetWord} `)
+        updateAlert(`    <i class="fa-solid fa-xmark"></i> You ran out of tries! \nThe correct word was: ${formatTargetWord} `)
         gameOver = true
     }
     currentRow++;
