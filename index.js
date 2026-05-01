@@ -168,7 +168,7 @@ const submitGuess = async () =>{
     }
 
    if (!(await isValidWord(currentGuess))) {
-        updateAlert("Not a valid word!");
+        updateAlert('<i class="fa-solid fa-xmark"></i> Not a valid word!')
         rowShakeEffect()
         return
 }
@@ -241,7 +241,7 @@ const submitGuess = async () =>{
         localStorage.setItem('totalgames',totalGamesCount)
 
         winRateDIV.textContent = Math.floor((totalWordsGuessed / totalGamesCount) * 100) + '%'
-        
+
         gameOver = true
     }
     currentRow++;

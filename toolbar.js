@@ -78,7 +78,7 @@ const themes = {
         greenOutline:"#264FE0",
         hover: "#496ceb",
         hoverOutline: "#7c91df",
-        yellow: "#d6ca43",
+        yellow: "#fff159",
         gray: "#5c637e",
         boxText:"#7c91df",
         navColor:'#264FE0',
