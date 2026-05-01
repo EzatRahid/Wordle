@@ -31,18 +31,6 @@ const themes = {
         boxText:"#FCFCF8",
         navColor:'#ffffff'
     },
-    miami: {
-        bg: "#18181A",
-        outline:"#FCFCF8",
-        text: "#35d4dd",
-        green: "#F35588",
-        greenOutline: "#f984a9",
-        hover: "#f383a6",
-        hoverOutline: "#f49ab6",
-        yellow: "#facc15",
-        gray: "#334155",
-        boxText:"#FCFCF8"
-    },
     strawberry: {
         bg: "#F37F83",
         text: "#FCFCF8",
@@ -81,6 +69,19 @@ const themes = {
         gray: "#2b2127",
         boxText:"#f3979d",
         navColor:'#EC4C56'
+    },
+       israel: {
+        bg: "#FCFCF8",
+        text: "#FCFCF8",
+        outline:"#d0d0d0",
+        green: "#264FE0",
+        greenOutline:"#264FE0",
+        hover: "#496ceb",
+        hoverOutline: "#7c91df",
+        yellow: "#d6ca43",
+        gray: "#5c637e",
+        boxText:"#7c91df",
+        navColor:'#264FE0',
     }
 };
 
