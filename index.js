@@ -67,6 +67,26 @@ let currentGuess = '';
 let currentRow = 0;
 let gameOver = false
 
+let totalGamesCount = Number(localStorage.getItem('totalgames')) || 0;
+let totalWordsGuessed = Number(localStorage.getItem('wins')) || 0;
+let bestTime = Number(localStorage.getItem('besttime')) || null
+
+let totalWinsDIV = document.getElementById('totalWins')
+totalWinsDIV.textContent = totalWordsGuessed
+let totalGamesDIV = document.getElementById('totalGames')
+totalGamesDIV.textContent = totalGamesCount
+let winRateDIV = document.getElementById('winRate')
+let bestTimeDIV = document.getElementById('bestTime')
+bestTimeDIV.textContent = bestTime ? bestTime.toFixed(2) + 's' : '--';
+
+
+if(totalGamesCount == 0){
+    winRateDIV.textContent = '0%'
+}else{
+    winRateDIV.textContent = Math.floor((totalWordsGuessed / totalGamesCount) * 100) + '%'
+}
+
+
 let newGameBtn = document.getElementById('newGame')
 
 let alertBox = document.getElementById('alert')
@@ -98,55 +118,130 @@ newGameBtn.addEventListener('click',() =>{
         gameOver = false
         updateAlert('<i class="fa-solid fa-check"></i> Game reset!')
 
+        winRateDIV.textContent = Math.floor((totalWordsGuessed / totalGamesCount) * 100) + '%';
+
+        isGameTimerOn = false;
+        startTime = null;
+
         console.log(targetWord)
 })
 
+
+async function isValidWord(word){
+    try{
+        const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+        return result.ok
+    }catch{
+        return false
+    }
+}
+
+let isGameTimerOn = false;
+let startTime = null;
+
+const startGameTimer =() =>{
+    isGameTimerOn = true
+    startTime = Date.now()
+}
+
 let formatTargetWord;
 
+const rowShakeEffect = () =>{
+    const rows = document.querySelectorAll('.row')
+    const currentRowEl = rows[currentRow]
+    currentRowEl.classList.add('shake')
+
+    setTimeout(() =>{
+        currentRowEl.classList.remove('shake')
+    },450)
+
+    return
+ }
+
 // Submits word
-const submitGuess = () =>{
+const submitGuess = async () =>{
+    if(gameOver) return
     if(currentGuess.length !== 5){
         updateAlert('<i class="fa-solid fa-xmark"></i> Not enough letters!')
-        const rows = document.querySelectorAll('.row')
-        const currentRowEl = rows[currentRow]
-
-        currentRowEl.classList.add('shake')
-
-        setTimeout(() =>{
-            currentRowEl.classList.remove('shake')
-        },450)
+        rowShakeEffect()
         return
     }
 
-    console.log('Submited: ', currentGuess)
+   if (!(await isValidWord(currentGuess))) {
+        updateAlert("Not a valid word!");
+        rowShakeEffect()
+        return
+}
+
     let rows = document.querySelectorAll('.row')
     let boxes = rows[currentRow].querySelectorAll('.box')
 
     if (currentGuess === targetWord) {
         updateAlert(' <i class="fa-solid fa-crown"></i> You Win! Want to play again?')
+
+        totalWordsGuessed++;
+        localStorage.setItem('wins',totalWordsGuessed)
+        totalWinsDIV.textContent = totalWordsGuessed
+
+        const totalGameTime = (Date.now() - startTime) / 1000;
+        isGameTimerOn = false
+
+        if (!bestTime) {
+         bestTime = totalGameTime;
+        } else {
+            bestTime = Math.min(totalGameTime, bestTime);
+        }
+
+        localStorage.setItem('besttime',bestTime)
+        bestTimeDIV.textContent = bestTime ? bestTime.toFixed(2) + 's' : '--';
+
+        
+        totalGamesCount++;
+        totalGamesDIV.textContent = totalGamesCount
+        localStorage.setItem('totalgames',totalGamesCount)
+
         gameOver = true;
     }
 
     
+    let targetArray = targetWord.split('')
+    let result = Array(5).fill('absent')
+
+
+    for (let i = 0; i < 5; i++) {
+        if (currentGuess[i] === targetArray[i]) {
+            result[i] = 'correct';
+            targetArray[i] = null;
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (result[i] === 'correct') continue;
+
+        const index = targetArray.indexOf(currentGuess[i]);
+        if (index !== -1) {
+            result[i] = 'present';
+            targetArray[index] = null; 
+        }
+    }
+
 
     boxes.forEach((box, i) => {
-        
         box.classList.remove('correct', 'present', 'absent');
-        if (currentGuess[i] === targetWord[i]) {
-            box.classList.add('correct');
-        }
-        else if (targetWord.includes(currentGuess[i])) {
-            box.classList.add('present');
-        }
-        else {
-            box.classList.add('absent');
-        }
+        box.classList.add(result[i]);
     });
-    
+
     
     if(currentRow === 5 && currentGuess !== targetWord){
         formatTargetWord = targetWord[0] + targetWord.slice(1).toLowerCase()
         updateAlert(`    <i class="fa-solid fa-xmark"></i> You ran out of tries! \nThe correct word was: ${formatTargetWord} `)
+        
+        totalGamesCount++;
+        totalGamesDIV.textContent = totalGamesCount
+        localStorage.setItem('totalgames',totalGamesCount)
+
+        winRateDIV.textContent = Math.floor((totalWordsGuessed / totalGamesCount) * 100) + '%'
+        
         gameOver = true
     }
     currentRow++;
@@ -194,9 +289,12 @@ document.addEventListener("keydown",(e) =>{
     }
 
     else if(/^[a-zA-Z]$/.test(key)){
+        if(!isGameTimerOn){
+            startGameTimer()
+        }
          if (currentGuess.length < 5) {
-        currentGuess += key.toUpperCase();
-    }
+            currentGuess += key.toUpperCase();
+        }
     }
 
     console.log(currentGuess)

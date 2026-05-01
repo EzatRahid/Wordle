@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="main">
-        <div class="themesContainer" id="themesContainer">
+        <div class="dropdown" id="themesContainer">
             <div class="themeDiv" data-theme="default">
                 <p>defualt</p>
                 <div class="colors">
@@ -47,14 +47,33 @@
                     <div class="color" style="background: #FCFCF8" style="border: 0.2px solid;"></div>
                 </div>
             </div>
-    
+        </div>
+        <div class="dropdown" id="statsContainer">
+            <div>
+                <p>Total Wins: </p>
+                <p id="totalWins"></p>
+            </div>
+            <div>
+                <p>Total Games Played: </p>
+                <p id="totalGames"></p>
+            </div>
+            <div>
+                <p>Win Rate: </p>
+                <p id="winRate"></p>
+            </div>
+            <div>
+                <p>Best Time: </p>
+                <p id="bestTime"></p>
+            </div>
+        </div>
+        <div class="dropdown" id="timerContainer">
         </div>
         <div class="alert" id="alert"></div>
         <div class="nav">
             <h1><span>らכ𑣓ᐁ𑣣𑣕しဖ</span></h1>
             <div class="navRight">
                 <div class="iconWrapper">
-                    <i class="fa-solid fa-paintbrush" id="themesBtn"></i>
+                    <i class="fa-solid fa-paintbrush" data-target="themesContainer"></i>
                     <div class="tooltip">Themes</div>
                 </div>
                 <div class="iconWrapper">
@@ -62,7 +81,7 @@
                     <div class="tooltip">Game Timer</div>
                 </div>
                 <div class="iconWrapper">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user" id="statsBtn" data-target="statsContainer"></i>
                     <div class="tooltip">Stats</div>
                 </div>
             </div>
@@ -73,7 +92,7 @@
         </div>
         <div class="gameContainer">
             <div class="gameInfo">
-                
+
             </div>
             <div class="row">
                 <div class="box"></div>

@@ -1,20 +1,21 @@
-let themesBtn = document.getElementById('themesBtn')
-let themesContainer = document.getElementById('themesContainer')
+const buttons = document.querySelectorAll('[data-target]');
 
-let themesOpen = false;
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const targetEl = document.getElementById(targetId);
 
-console.log(themesContainer)
+         const isOpen = targetEl.classList.contains('reveal');
 
-themesBtn.addEventListener('click', () =>{
+        document.querySelectorAll('.dropdown').forEach(el => {
+            el.classList.remove('reveal');
+        });
 
-    if(themesOpen == false){
-        themesContainer.classList.add('reveal')
-        themesOpen = true
-    }else{
-        themesContainer.classList.remove('reveal')
-        themesOpen = false
-    }
-})
+       if(!isOpen) {
+            targetEl.classList.add('reveal');
+        }
+    });
+});
 
 const themes = {
     default: {
@@ -96,5 +97,15 @@ document.querySelectorAll('.themeDiv').forEach(div => {
     div.addEventListener('click', () => {
         const themeName = div.dataset.theme;
         applyTheme(themeName);
+
+        localStorage.setItem('theme',themeName)
     });
 });
+
+const savedThemes = localStorage.getItem('theme')
+
+if(savedThemes){
+    applyTheme(savedThemes)
+}
+
+

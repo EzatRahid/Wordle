@@ -101,9 +101,9 @@
 }
 
 
-.themesContainer {
+.dropdown{
     position: absolute;
-    right: 5%;
+    right: 2%;
     top: 5%;
     max-width: fit-content;
     background-color: var(--bg);
@@ -119,6 +119,18 @@
 
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
+
+#statsContainer div{
+    color: var(--navColor);
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 10px;
+}
+#statsContainer div p{
+
+}
+
 .themeDiv{
    margin-bottom: 10px;
    cursor: pointer;
@@ -151,7 +163,7 @@
     margin-right: 5px;
     border: 0.1px solid;
 }
-.themesContainer.reveal {
+.dropdown.reveal {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
